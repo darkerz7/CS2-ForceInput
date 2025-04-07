@@ -2,12 +2,12 @@
 Allows admins to force inputs on entities. (ent_fire)
 
 ## Commands:
-`css_entfire <name> <input> [parameter]` - to force inputs on entities(Need: `@css/rcon`)
+`css_entfire <name> <input> [parameter]` - to force inputs on entities(Need: `@css/rcon`)<br>
 `css_forceinput <name> <input> [parameter]` - to force inputs on entities(Need: `@css/rcon`)
 
 ## Arguments:
-`name` - `!picker`, `!selfpawn`, targetname, classname
-`input` - required input for entity
+`name` - `!picker`, `!selfpawn`, targetname, classname<br>
+`input` - required input for entity<br>
 `parameter` - variable parameter for input
 
 ## Example:
