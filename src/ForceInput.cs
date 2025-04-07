@@ -11,7 +11,7 @@ namespace CS2_ForceInput
 		public override string ModuleName => "ForceInput";
 		public override string ModuleDescription => "Allows admins to force inputs on entities. (ent_fire)";
 		public override string ModuleAuthor => "DarkerZ [RUS]";
-		public override string ModuleVersion => "1.DZ.0";
+		public override string ModuleVersion => "1.DZ.1";
 
 		public override void Unload(bool hotReload)
 		{
@@ -39,16 +39,16 @@ namespace CS2_ForceInput
 					CBaseEntity? target = _gameRules.FindPickerEntity<CBasePlayerController>(admin);
 					if (target != null)
 					{
-						target.AcceptInput(sInput, admin, admin, sParameter);
+						target.AcceptInput(sInput, admin.PlayerPawn.Value, admin.PlayerPawn.Value, sParameter);
 						iFoundEnts++;
 					}
 				}
 			}
 			if (admin != null && sEntName.CompareTo("!selfpawn") == 0)
 			{
-				if(admin.Pawn.Value != null && admin.Pawn.Value.IsValid)
+				if(admin.PlayerPawn.Value != null && admin.PlayerPawn.Value.IsValid)
 				{
-					admin.Pawn.Value.AcceptInput(sInput, admin, admin, sParameter);
+					admin.PlayerPawn.Value.AcceptInput(sInput, admin.PlayerPawn.Value, admin.PlayerPawn.Value, sParameter);
 					iFoundEnts++;
 				}
 			}
@@ -59,7 +59,8 @@ namespace CS2_ForceInput
 				{
 					if(entity.Entity != null && sEntName.CompareTo(entity.Entity.Name) == 0)
 					{
-						entity.AcceptInput(sInput, admin, admin, sParameter);
+						CCSPlayerPawn? PawnAdmin = admin?.PlayerPawn.Value;
+						entity.AcceptInput(sInput, PawnAdmin, PawnAdmin, sParameter);
 						iFoundEnts++;
 					}
 				}
@@ -69,7 +70,8 @@ namespace CS2_ForceInput
 			{
 				foreach (var entity in Utilities.FindAllEntitiesByDesignerName<CBaseEntity>(sEntName))
 				{
-					entity.AcceptInput(sInput, admin, admin, sParameter);
+					CCSPlayerPawn? PawnAdmin = admin?.PlayerPawn.Value;
+					entity.AcceptInput(sInput, PawnAdmin, PawnAdmin, sParameter);
 					iFoundEnts++;
 				}
 			}
