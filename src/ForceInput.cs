@@ -11,7 +11,7 @@ namespace CS2_ForceInput
 		public override string ModuleName => "ForceInput";
 		public override string ModuleDescription => "Allows admins to force inputs on entities. (ent_fire)";
 		public override string ModuleAuthor => "DarkerZ [RUS]";
-		public override string ModuleVersion => "1.DZ.1";
+		public override string ModuleVersion => "1.DZ.2";
 
 		public override void Unload(bool hotReload)
 		{
@@ -31,7 +31,7 @@ namespace CS2_ForceInput
 			string sInput = command.GetArg(2);
 			string sParameter = command.GetArg(3);
 
-			if (admin != null && sEntName.CompareTo("!picker") == 0)
+			if (admin != null && string.Equals(sEntName, "!picker"))
 			{
 				CCSGameRules? _gameRules = Utilities.FindAllEntitiesByDesignerName<CCSGameRulesProxy>("cs_gamerules").FirstOrDefault()?.GameRules;
 				if(_gameRules != null)
@@ -44,7 +44,7 @@ namespace CS2_ForceInput
 					}
 				}
 			}
-			if (admin != null && sEntName.CompareTo("!selfpawn") == 0)
+			if (admin != null && string.Equals(sEntName, "!selfpawn"))
 			{
 				if(admin.PlayerPawn.Value != null && admin.PlayerPawn.Value.IsValid)
 				{
@@ -57,7 +57,7 @@ namespace CS2_ForceInput
 			{
 				foreach (var entity in Utilities.GetAllEntities())
 				{
-					if(entity.Entity != null && sEntName.CompareTo(entity.Entity.Name) == 0)
+					if(entity.Entity != null && string.Equals(sEntName, entity.Entity.Name))
 					{
 						CCSPlayerPawn? PawnAdmin = admin?.PlayerPawn.Value;
 						entity.AcceptInput(sInput, PawnAdmin, PawnAdmin, sParameter);
@@ -68,11 +68,14 @@ namespace CS2_ForceInput
 
 			if (iFoundEnts == 0)
 			{
-				foreach (var entity in Utilities.FindAllEntitiesByDesignerName<CBaseEntity>(sEntName))
+				foreach (var entity in Utilities.GetAllEntities())
 				{
-					CCSPlayerPawn? PawnAdmin = admin?.PlayerPawn.Value;
-					entity.AcceptInput(sInput, PawnAdmin, PawnAdmin, sParameter);
-					iFoundEnts++;
+					if (entity.Entity != null && string.Equals(sEntName, entity.DesignerName))
+					{
+						CCSPlayerPawn? PawnAdmin = admin?.PlayerPawn.Value;
+						entity.AcceptInput(sInput, PawnAdmin, PawnAdmin, sParameter);
+						iFoundEnts++;
+					}
 				}
 			}
 
