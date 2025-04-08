@@ -11,7 +11,7 @@ namespace CS2_ForceInput
 		public override string ModuleName => "ForceInput";
 		public override string ModuleDescription => "Allows admins to force inputs on entities. (ent_fire)";
 		public override string ModuleAuthor => "DarkerZ [RUS]";
-		public override string ModuleVersion => "1.DZ.2";
+		public override string ModuleVersion => "1.DZ.2.1";
 
 		public override void Unload(bool hotReload)
 		{
@@ -70,7 +70,7 @@ namespace CS2_ForceInput
 			{
 				foreach (var entity in Utilities.GetAllEntities())
 				{
-					if (entity.Entity != null && string.Equals(sEntName, entity.DesignerName))
+					if (string.Equals(sEntName, entity.DesignerName))
 					{
 						CCSPlayerPawn? PawnAdmin = admin?.PlayerPawn.Value;
 						entity.AcceptInput(sInput, PawnAdmin, PawnAdmin, sParameter);
