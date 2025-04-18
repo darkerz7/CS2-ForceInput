@@ -59,4 +59,4 @@ jobs:
         generateReleaseNotes: true
         makeLatest: true
         body: |
-          [Core]${{ env.PROJECT_NAME }} release ${{ env.BUILD_NUMBER }} for CS#. Allows admins to force inputs on entities. (ent_fire).
+          ${{ env.PROJECT_NAME }} release ${{ env.BUILD_NUMBER }} for CS#. Allows admins to force inputs on entities. (ent_fire).
