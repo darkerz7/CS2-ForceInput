@@ -1,17 +1,19 @@
 ﻿using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
+using CounterStrikeSharp.API.Core.Attributes;
 using CounterStrikeSharp.API.Core.Attributes.Registration;
 using CounterStrikeSharp.API.Modules.Admin;
 using CounterStrikeSharp.API.Modules.Commands;
 
 namespace CS2_ForceInput
 {
+    [MinimumApiVersion(369)]
     public class ForceInput : BasePlugin
 	{
 		public override string ModuleName => "ForceInput";
 		public override string ModuleDescription => "Allows admins to force inputs on entities. (ent_fire)";
 		public override string ModuleAuthor => "DarkerZ [RUS]";
-		public override string ModuleVersion => "1.DZ.2.1";
+		public override string ModuleVersion => "1.DZ.3";
 
 		public override void Unload(bool hotReload)
 		{
